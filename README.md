@@ -28,7 +28,6 @@ Tailscale creates a secure, encrypted network between your devices using WireGua
 - Run locally and access via your Tailscale IP
 - Useful for dashboards, static pages, or personal web apps
 
-📁 Folder: `method-1-custom-server/`
 
 ### 📺 Method 2 – Tailscale + Jellyfin
 
@@ -36,9 +35,4 @@ Tailscale creates a secure, encrypted network between your devices using WireGua
 - Paired with Tailscale for secure remote access to your media library
 - No need to expose ports or use a public IP
 
-📁 Folder: `method-2-jellyfin-server/`
-
----
-
-## 📁 Repository Structure
 

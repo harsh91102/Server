@@ -1,0 +1,106 @@
+# 🎬 Secure Media Streaming with Jellyfin + Tailscale
+
+This guide helps you set up a **Jellyfin media server** and access it **securely from anywhere using Tailscale**.
+
+✅ No port forwarding  
+✅ No public IP needed  
+✅ Encrypted peer-to-peer connections using WireGuard
+
+---
+
+## 🔧 What You'll Need
+
+- A Linux PC, Windows, macOS, or Raspberry Pi (to host Jellyfin)  
+- A [Tailscale](https://tailscale.com) account (free for personal use)  
+- Internet connection  
+- (Optional) Docker for easier Jellyfin deployment
+
+---
+
+## 📥 Step-by-Step Installation
+
+### Step 1: Install Tailscale
+
+#### On Linux (Ubuntu/Debian):
+```bash
+curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up
+
+On Windows/macOS:
+Download and install from: https://tailscale.com/download
+Log in with your preferred email/GitHub account.
+
+On Raspberry Pi:
+Same as Linux — use the command above.
+
+🔐 Once installed, log in and get your Tailscale IP.
+
+Step 2: Install Jellyfin
+Option A: Docker (Recommended)
+Install Docker and Docker Compose:
+
+
+sudo apt install docker.io docker-compose -y
+
+version: '3.3'
+
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    network_mode: "host"
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - ./media:/media
+    restart: unless-stopped
+Start Jellyfin:
+
+
+docker compose up -d
+Option B: Native Installation (Linux)
+
+sudo apt install apt-transport-https
+sudo apt install jellyfin
+For detailed platform-specific installs, check: Jellyfin Downloads
+
+Step 3: Access Jellyfin via Tailscale
+On the host machine:
+Open Jellyfin at http://localhost:8096
+
+On another device in your Tailscale network:
+Use the Tailscale IP of the host machine:
+
+
+http://<TAILSCALE-IP>:8096
+✅ Example:
+If the host's Tailscale IP is 100.115.92.33, access it from your phone (with Tailscale installed) at:
+
+
+http://100.115.92.33:8096
+🔐 Why This is Secure
+Jellyfin is not exposed to the internet
+
+Only devices in your Tailscale network can connect
+
+All communication is encrypted using WireGuard
+
+📁 Folder Structure (if using Docker)
+bash
+Copy
+Edit
+/
+├── docker-compose.yml
+├── config/         # Jellyfin config files
+├── cache/          # Transcoding cache
+└── media/          # Your videos, music, etc.
+🧠 Bonus Ideas
+Set a static Tailscale IP for Jellyfin using tailscale serve
+
+Use mobile Tailscale app to stream on the go
+
+Add multiple media libraries (Movies, TV, Music)
+
+🧑‍💻 Author
+Project by [HARSH] – passionate about secure, self-hosted solutions.
+Feel free to fork, improve, or ask questions!
